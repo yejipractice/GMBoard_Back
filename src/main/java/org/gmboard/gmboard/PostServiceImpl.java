@@ -25,11 +25,11 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public Post savePost(PostRequestDto requestDto) {
-        String imgUrl = saveFile(requestDto.getImg());
+    public Post savePost(MultipartFile file, String content) {
+        String imgUrl = saveFile(file);
 
         Post newPost = Post.builder()
-                .content(requestDto.getContent())
+                .content(content)
                 .img(imgUrl)
                 .build();
 

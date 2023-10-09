@@ -1,10 +1,9 @@
 package org.gmboard.gmboard;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -20,8 +19,8 @@ public class PostController {
         return postService.getPosts();
     }
 
-    @PostMapping("/")
-    public Post savePost(PostRequestDto requestDto) {
-        return postService.savePost(requestDto);
+    @PostMapping(value = "/", consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public Post savePost(@RequestPart(value = "file", required = false) MultipartFile file, @RequestPart(value = "content") String content) {
+        return postService.savePost(file, content);
     }
 }
