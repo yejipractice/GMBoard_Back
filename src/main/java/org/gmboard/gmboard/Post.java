@@ -18,6 +18,7 @@ public class Post extends TimeStamped{
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Lob
     @Column(nullable = false)
     private String content;
 
